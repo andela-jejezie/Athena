@@ -7,11 +7,10 @@ const userController = {
         return User
         .findById(req.params.id)
         .then((user) => {
-            console.log('########', user);
             let formattedUser = helper.userInfo(user);
-            res.status(201).send(formattedUser);
+            res.status(201).send({status:1, user:formattedUser});
         })
-        .catch((error) => res.status(404).send(error));
+        .catch((error) => res.status(404).send({status:0, error:error}));
     },
 
     upvoteUser(req, res) {
@@ -19,6 +18,7 @@ const userController = {
             .findById(req.params.id)
             .then((user) => {
                 user.increment('social_capital');
+                res.status(201).send({status:1, user:user});
             })
             .catch((error) => res.status(404).send({status:0, error:error}));
     },
@@ -27,6 +27,7 @@ const userController = {
             .findById(req.params.id)
             .then((user) => {
                 user.decrement('social_capital');
+                res.status(201).send({status:1, user:user});
             })
             .catch((error) => res.status(404).send({status:0, error:error}));
     }

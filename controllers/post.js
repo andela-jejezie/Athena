@@ -13,21 +13,21 @@ const postController = {
                 images:body.images,
                 ownerId:req.user.id
             })
-            .then((post) => res.status(201).send(post))
-            .catch((error) => res.status(400).send(error));
+            .then((post) => res.status(201).send({status:1, post:post}))
+            .catch((error) => res.status(400).send({status:0, error:error}));
     },
 
     getPostById(req, res) {
         return Post
             .findOne({where:{id:req.params.id}})
-            .then((post) => res.status(201).send(post))
-            .catch((error) => res.status(404).send(error));
+            .then((post) => res.status(201).send({status:1, post:post}))
+            .catch((error) => res.status(404).send({status:0, error:error}));
     },
     getListOfPost(req, res) {
         return Post
             .findAll()
-            .then((posts) => res.status(201).send({posts}))
-            .catch((error) => res.status(404).send(error));
+            .then((posts) => res.status(201).send({status:1, post:posts}))
+            .catch((error) => res.status(404).send({status:0, error:error}));
     },
     updatePost(req, res) {
         
@@ -104,11 +104,9 @@ const postController = {
                 }
                 var likers = post.likers;
                 let isInLikers = likers.includes(dislikerId);
-                console.log('here******', isInLikers);
                 if(isInLikers){
                     likers = helper.remove(likers, dislikerId);
                 }
-                console.log('here******');
                 var dislikers = post.dislikers;
                 let condition = dislikers.includes(dislikerId);
                 
