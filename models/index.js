@@ -5,13 +5,19 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
-var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
 var db        = {};
 
 let sequelize;
 if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, config);
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect:  'postgres',
+      protocol: 'postgres',
+      port:     match[4],
+      host:     match[3],
+      logging:  true 
+  });
 } else {
+  var config    = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
