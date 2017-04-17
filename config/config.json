@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "johnsonejezie",
+    "password": null,
+    "database": "smartwoman-dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "JWT_SECRET":"ae0230f4beb18f313b48bb37fec1d39b186816e9f53eaff6"
+  },
+  "test": {
+    "username": "johnsonejezie",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}
