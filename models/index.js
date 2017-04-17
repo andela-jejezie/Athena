@@ -9,7 +9,7 @@ var db        = {};
 
 let sequelize;
 if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+  sequelize = new Sequelize(process.env.use_env_variable, {
     dialect:  'postgres',
       protocol: 'postgres',
       "host": "127.0.0.1",
